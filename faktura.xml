@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Faktura numer="1/FVS/2026" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="faktura.xsd">
+    <Naglowek>
+        <MiejsceWystawienia>Warszawa</MiejsceWystawienia>
+        <Data>
+            <Wystawienia>2026-02-13</Wystawienia>
+            <Sprzedazy>2026-02-13</Sprzedazy>
+            <Operacji>2026-02-13</Operacji>
+        </Data>
+        <Platnosc>
+            <Termin jednostka="dni">14</Termin>
+            <RachunekBankowy kodKraju="PL" bank="mBank">24900000050000460083168772</RachunekBankowy>
+            <Rodzaj>Przelew</Rodzaj>
+        </Platnosc>
+    </Naglowek>
+    <StronyTransakcji>
+        <Sprzedawca>
+            <Nazwa>Piekarnia "Upiekło Ci Się"</Nazwa>
+            <Nip>1234567890</Nip>
+            <Adres>
+                <Ulica>Kowalska 5</Ulica>
+                <Lokal>10</Lokal>
+                <Kod>05-100</Kod>
+                <Miejscowosc>Nowy Dwór Mazowiecki</Miejscowosc>
+            </Adres>
+        </Sprzedawca>
+
+        <Nabywca>
+            <Nazwa>ABC Info Jan Nowak</Nazwa>
+            <Nip>0987654321</Nip>
+            <Adres>
+                <Ulica>Górnicza 90</Ulica>
+                <Lokal>43</Lokal>
+                <Kod>02-142</Kod>
+                <Miejscowosc>Warszawa</Miejscowosc>
+            </Adres>
+        </Nabywca>
+    </StronyTransakcji>
+    <Pozycje>
+        <Pozycja lp="1">
+            <Nazwa>Ciastko truskawkowe 4-pak</Nazwa>
+            <JednostkaMiary>szt.</JednostkaMiary>
+            <Ilosc>5</Ilosc>
+            <Cena waluta="PLN">30.00</Cena>
+            <Netto>150</Netto>
+            <Vat stawka="8%">12</Vat>
+            <Brutto>162</Brutto>
+        </Pozycja>
+        <Pozycja lp="2">
+            <Nazwa>Ciastko malinowe 4-pak</Nazwa>
+            <JednostkaMiary>szt.</JednostkaMiary>
+            <Ilosc>5</Ilosc>
+            <Cena waluta="PLN">30.00</Cena>
+            <Netto>150</Netto>
+            <Vat stawka="8%">12</Vat>
+            <Brutto>162</Brutto>
+        </Pozycja>
+
+    </Pozycje>
+    <Podsumowanie>
+        <Netto>150</Netto>
+        <Vat stawka="8%">12</Vat>
+        <Brutto>162</Brutto>
+    </Podsumowanie>
+</Faktura>

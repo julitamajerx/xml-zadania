@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Faktura">
+        <xs:complexType>
+            <xs:sequence>
+                <!--NAGŁÓWEK-->
+                <xs:element name="Naglowek">
+                    <xs:complexType>
+                        <xs:sequence>
+                             <!--Miejsce Wystawienia-->
+                            <xs:element name="MiejsceWystawienia" type="xs:string"/>
+                            <!--Data-->
+                            <xs:element name="Data">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Wystawienia" type="xs:date"/>
+                                        <xs:element name="Sprzedazy" type="xs:date"/>
+                                        <xs:element name="Operacji" type="xs:date"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <!--Platność-->
+                            <xs:element name="Platnosc">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Termin">
+                                            <xs:complexType>
+                                                <xs:simpleContent>
+                                                    <xs:extension base="xs:positiveInteger">
+                                                        <xs:attribute name="jednostka" type="xs:string" use="required"/>
+                                                    </xs:extension>
+                                                </xs:simpleContent>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="RachunekBankowy">
+                                            <xs:complexType>
+                                                <xs:simpleContent>
+                                                    <xs:extension base="xs:string">
+                                                        <xs:attribute name="kodKraju" type="xs:string" use="required" />
+                                                        <xs:attribute name="bank" type="xs:string" />
+                                                    </xs:extension>
+                                                </xs:simpleContent>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="Rodzaj" type="xs:string"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <!--STRONY TRANSAKCJI-->
+                <xs:element name="StronyTransakcji">
+                    <xs:complexType>
+                        <xs:sequence>
+                               <xs:element name="Sprzedawca" type="TypPodmiot"/>
+                               <xs:element name="Nabywca" type="TypPodmiot"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <!--POZYCJE-->
+                <xs:element name="Pozycje">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Pozycja" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Nazwa" type="xs:string"/>
+                                        <xs:element name="JednostkaMiary" type="xs:string"/>
+                                        <xs:element name="Ilosc" type="xs:decimal"/>
+                                        <xs:element name="Cena">
+                                            <xs:complexType>
+                                                <xs:simpleContent>
+                                                    <xs:extension base="TypKwota">
+                                                        <xs:attribute name="waluta" type="xs:string" use="required" />
+                                                    </xs:extension>
+                                                </xs:simpleContent>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="Netto" type="TypKwota"/>
+                                        <xs:element name="Vat">
+                                             <xs:complexType>
+                                                <xs:simpleContent>
+                                                    <xs:extension base="TypKwota">
+                                                        <xs:attribute name="stawka" type="xs:string" use="required" />
+                                                    </xs:extension>
+                                                </xs:simpleContent>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="Brutto" type="TypKwota"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="lp" type="xs:positiveInteger" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <!-- PODSUMOWANIE-->
+                 <xs:element name="Podsumowanie">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Netto" type="TypKwota"/>
+                            <xs:element name="Vat">
+                                <xs:complexType>
+                                     <xs:simpleContent>
+                                            <xs:extension base="TypKwota">
+                                                <xs:attribute name="stawka" type="xs:string" use="required" />
+                                            </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="Brutto" type="TypKwota"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                 </xs:element>
+            </xs:sequence>
+            <xs:attribute name="numer" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="TypKwota">
+        <xs:restriction base="xs:decimal">
+            <xs:fractionDigits value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="TypPodmiot">
+        <xs:sequence>
+            <xs:element name="Nazwa" type="xs:string"/>
+            <xs:element name="Nip" type="xs:string"/>
+            <xs:element name="Adres">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Ulica" type="xs:string"/>
+                        <xs:element name="Lokal" type="xs:string" minOccurs="0"/>
+                        <xs:element name="Kod" type="xs:string"/>
+                        <xs:element name="Miejscowosc" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema> 
